@@ -26,7 +26,11 @@ function App() {
   const navigate = useNavigate();
   useEffect(() => {
       if (pb && pb.authStore.record) {
-        navigate({ to: '/game' });
+        if (pb.authStore.record.is_admin) {
+          navigate({ to: '/admin' });
+        } else {
+          navigate({ to: '/game' });
+        }
       }
   }, [])
   const form = useForm({
@@ -42,8 +46,12 @@ function App() {
       try {
         await pb.collection('users').authWithPassword(value.email, value.password);
       } catch {}
-      if (pb.authStore.isValid) {
-        navigate({ to: '/game' });
+      if (pb.authStore.record) {
+        if (pb.authStore.record.is_admin) {
+          navigate({ to: '/admin' });
+        } else {
+          navigate({ to: '/game' });
+        }
         return;
       }
       alert("Failed to authenticate");

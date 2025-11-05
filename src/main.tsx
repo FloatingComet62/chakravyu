@@ -6,11 +6,13 @@ import {
   createRootRoute,
   createRoute,
   createRouter,
+  useNavigate,
 } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
-import StoreDemo from './routes/demo/store.tsx'
+
 import Game from './routes/game.tsx'
 import Challenge from './routes/challenge.tsx'
+import Admin from './routes/admin.tsx'
 
 import './styles.css'
 import reportWebVitals from './reportWebVitals.ts'
@@ -26,6 +28,10 @@ const rootRoute = createRootRoute({
       <TanStackRouterDevtools />
     </>
   ),
+  notFoundComponent: () => {
+    const navigate = useNavigate();
+    navigate({ to: '/' })
+  }
 })
 
 const indexRoute = createRoute({
@@ -36,8 +42,8 @@ const indexRoute = createRoute({
 
 const routeTree = rootRoute.addChildren([
   indexRoute,
+  Admin(rootRoute),
   Game(rootRoute),
-  StoreDemo(rootRoute),
   Challenge(rootRoute),
 ])
 

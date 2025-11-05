@@ -19,4 +19,7 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  optimizeDeps: {
+    exclude: ["pocketbase", "pb_data", "pb_migrations"]
+  }
 })
