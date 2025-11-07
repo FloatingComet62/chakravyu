@@ -9,4 +9,4 @@ RUN unzip /tmp/pb.zip -d /pb/
 
 EXPOSE 8090
 
-CMD ["/pb/pocketbase", "serve", "--http=0.0.0.0:8090"]
+CMD ["/pb/pocketbase", "serve", "--http=127.0.0.1:8090"]
