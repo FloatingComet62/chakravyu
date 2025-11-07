@@ -67,7 +67,7 @@ if (rootElement && !rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
   root.render(
     <StrictMode>
-    <DatabaseContext value={new PocketBase('http://127.0.0.1:8090')}>
+    <DatabaseContext value={new PocketBase('http://api-decypher.ccstiet.com')}>
       <RouterProvider router={router} />
     </DatabaseContext>
     </StrictMode>,
