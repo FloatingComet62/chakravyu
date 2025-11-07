@@ -1,0 +1,30 @@
+version: "3.9"
+services:
+  pocketbase:
+    build:
+      context: ./pocketbase
+      dockerfile: Dockerfile
+    container_name: pocketbase
+    ports:
+      - "8080:8080"
+    volumes:
+      - pb_data:/pb/pb_data
+      - ./pocketbase/pb_migrations:/pb/pb_migrations
+      - ./pocketbase/pb_hooks:/pb/pb_hooks
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tanstack-frontend
+    ports:
+      - "4173:4173"
+    depends_on:
+      - pocketbase
+    environment:
+      VITE_API_URL: "http://pocketbase:8080"
+    restart: unless-stopped
+
+volumes:
+  pb_data:
