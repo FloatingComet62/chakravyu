@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     container_name: pocketbase
     ports:
-      - "8080:8080"
+      - "8090:8090"
     volumes:
       - pb_data:/pb/pb_data
       - ./pocketbase/pb_migrations:/pb/pb_migrations
@@ -19,7 +19,7 @@ services:
       dockerfile: Dockerfile
     container_name: tanstack-frontend
     ports:
-      - "4173:4173"
+      - "6968:80"
     depends_on:
       - pocketbase
     environment:

@@ -3,7 +3,7 @@ import type { RootRoute } from '@tanstack/react-router'
 import { createRoute, useNavigate } from '@tanstack/react-router'
 import { useContext, useEffect, useState } from 'react'
 
-function isTarget(card, suit) {
+function isTarget(card: number, suit: number) {
   const card_suit = Math.round(card / 13);
   return card_suit == suit;
 }

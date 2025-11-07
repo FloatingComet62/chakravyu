@@ -42,9 +42,9 @@ const indexRoute = createRoute({
 
 const routeTree = rootRoute.addChildren([
   indexRoute,
-  Admin(rootRoute),
-  Game(rootRoute),
-  Challenge(rootRoute),
+  Admin(rootRoute as any),
+  Game(rootRoute as any),
+  Challenge(rootRoute as any),
 ])
 
 const router = createRouter({

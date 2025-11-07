@@ -143,7 +143,7 @@ function Game() {
             onChange={(e) => field.handleChange(e.target.value)}
           />
             {field.state.meta.isTouched && !field.state.meta.isValid ? (
-              <div className="flex flex-col gap-2 text-sm text-[#ff0000]">{field.state.meta.errors.map(x => <div>{x.message}</div>)}</div>
+              <div className="flex flex-col gap-2 text-sm text-[#ff0000]">{field.state.meta.errors.map(x => <div>{x!.message}</div>)}</div>
             ) : null}
             {field.state.meta.isValidating ? 'Validating...' : null}
         </div>}
