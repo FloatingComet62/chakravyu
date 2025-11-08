@@ -63,7 +63,7 @@ function Challenge() {
         <div className="text-5xl mb-4">{game.name}</div>
         <div className="text-lg text-[#999999]">Put decks on the line</div>
         <div className="flex gap-4 h-full">{game.suits.map((i) => {
-          const c = cards.filter(idx => Math.round(idx / 13) == i);
+          const c = cards.filter(idx => Math.floor(idx / 13) == i);
           if (c.length == 0) {
             return <div className="flex flex-col justify-between">
               <div>{suits[i]}</div>

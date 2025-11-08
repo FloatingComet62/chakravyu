@@ -28,5 +28,5 @@ export function Card({ rank, suit }: { rank: string; suit: string; }) {
 }
 
 export function Cardn({ n }: { n: number }) {
-  return <Card suit={suits[Math.round(n / 13)]} rank={ranks[n % 13]} />
+  return <Card suit={suits[Math.floor(n / 13)]} rank={ranks[n % 13]} />
 }

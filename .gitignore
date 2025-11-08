@@ -9,5 +9,3 @@ count.txt
 .tanstack
 .wrangler
 pocketbase/pocketbase
-pb_data
-pb_migrations

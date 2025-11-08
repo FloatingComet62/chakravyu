@@ -20,7 +20,7 @@ function generateCode() {
 const codeSchema = z.object({
   code: z.string()
     // .length(4, 'Code should be 4 letters long')
-    .regex(/^[A-Z]{4}$/, { message: 'Code must contain only 4 capital letters'}),
+    .regex(/^[A-z]{4}$/, { message: 'Code must contain only 4 letters'}),
 });
 
 function Game() {
@@ -40,7 +40,8 @@ function Game() {
     },
     onSubmit: async ({ value }) => {
       if (!pb || !pb.authStore.record) return;
-      const record = await pb.collection('challenges').getFirstListItem(`code="${value.code}"`);
+      const record = await pb.collection('challenges').getFirstListItem(`code="${value.code.toUpperCase()}"`);
+      if (record.receiver == pb.authStore.record.id) return;
       await pb.collection('challenges').update(record.id, {
         code: value.code, // required for verification of access
         accepter: pb.authStore.record.id,
@@ -96,6 +97,7 @@ function Game() {
         challengeRecordId: record.id,
         accepter: e.record.accepter,
       });
+      pb.collection('challenges').unsubscribe(record.id);
       navigate({ to: '/challenge' });
     })
   }
@@ -109,7 +111,7 @@ function Game() {
   <div className="grid grid-cols-3 md:grid-cols-5 gap-4">
     {cards.map(i => <Cardn n={i} />)}
   </div>
-  {showReceiveModel ? <div className="flex flex-col gap-8 items-center absolute w-1/2 h-1/2 bg-[#151515] text-white">
+  {showReceiveModel ? <div className="flex flex-col gap-8 items-center absolute w-full md:w-1/2 h-1/2 bg-[#151515] text-white">
     <button onClick={() => {
       setShowReceiveModel(false);
       setCode("");
@@ -119,7 +121,7 @@ function Game() {
     <div className="text-3xl">Code</div>
     <div className="text-8xl font-bold">{code}</div>
   </div> : null}
-  {showSendModel ? <div className="flex flex-col gap-8 items-center absolute w-1/2 h-1/2 bg-[#151515] text-white">
+  {showSendModel ? <div className="flex flex-col gap-8 items-center absolute w-full md:w-1/2 h-1/2 bg-[#151515] text-white">
     <button onClick={() => {
       setShowSendModel(false);
       setCode("");
