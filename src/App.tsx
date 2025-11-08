@@ -68,7 +68,7 @@ function App() {
         }}>
           <form.Field name="email">
             {(field) => <div className="flex flex-col gap-2 items-start">
-              <label htmlFor={field.name} className="text-lg">First Name</label>
+              <label htmlFor={field.name} className="text-lg">Email</label>
               <input
                 className="bg-[#efefef] text-black p-2 text-center outline-none rounded-sm"
                 id={field.name}
